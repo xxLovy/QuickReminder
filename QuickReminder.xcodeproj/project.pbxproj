@@ -64,8 +64,8 @@
 		D9559B5D2BE4C13F002BF47C /* QuickReminder */ = {
 			isa = PBXGroup;
 			children = (
-				D9121B272BE5DFFA007FC3A4 /* Prompt.swift */,
 				D9559B902BE5203D002BF47C /* Info.plist */,
+				D9121B272BE5DFFA007FC3A4 /* Prompt.swift */,
 				D9121B252BE5CE6F007FC3A4 /* ReminderSelectionView.swift */,
 				D9559B8E2BE50E0C002BF47C /* ReminderService.swift */,
 				D9559B8C2BE50BE1002BF47C /* ReminderManager.swift */,

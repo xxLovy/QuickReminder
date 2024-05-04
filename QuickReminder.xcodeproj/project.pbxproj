@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D9121B262BE5CE6F007FC3A4 /* ReminderSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9121B252BE5CE6F007FC3A4 /* ReminderSelectionView.swift */; };
+		D9121B282BE5DFFA007FC3A4 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9121B272BE5DFFA007FC3A4 /* Prompt.swift */; };
 		D9559B5F2BE4C13F002BF47C /* QuickReminderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9559B5E2BE4C13F002BF47C /* QuickReminderApp.swift */; };
 		D9559B612BE4C13F002BF47C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9559B602BE4C13F002BF47C /* ContentView.swift */; };
 		D9559B632BE4C141002BF47C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9559B622BE4C141002BF47C /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		D9121B252BE5CE6F007FC3A4 /* ReminderSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderSelectionView.swift; sourceTree = "<group>"; };
+		D9121B272BE5DFFA007FC3A4 /* Prompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 		D9559B5B2BE4C13F002BF47C /* QuickReminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuickReminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9559B5E2BE4C13F002BF47C /* QuickReminderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickReminderApp.swift; sourceTree = "<group>"; };
 		D9559B602BE4C13F002BF47C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,8 +64,9 @@
 		D9559B5D2BE4C13F002BF47C /* QuickReminder */ = {
 			isa = PBXGroup;
 			children = (
-				D9121B252BE5CE6F007FC3A4 /* ReminderSelectionView.swift */,
+				D9121B272BE5DFFA007FC3A4 /* Prompt.swift */,
 				D9559B902BE5203D002BF47C /* Info.plist */,
+				D9121B252BE5CE6F007FC3A4 /* ReminderSelectionView.swift */,
 				D9559B8E2BE50E0C002BF47C /* ReminderService.swift */,
 				D9559B8C2BE50BE1002BF47C /* ReminderManager.swift */,
 				D9559B702BE4E2DB002BF47C /* OCRController.swift */,
@@ -155,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9121B262BE5CE6F007FC3A4 /* ReminderSelectionView.swift in Sources */,
+				D9121B282BE5DFFA007FC3A4 /* Prompt.swift in Sources */,
 				D9559B712BE4E2DB002BF47C /* OCRController.swift in Sources */,
 				D9559B8D2BE50BE1002BF47C /* ReminderManager.swift in Sources */,
 				D9559B6D2BE4C9B4002BF47C /* ImagePicker.swift in Sources */,

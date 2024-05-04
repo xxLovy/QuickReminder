@@ -4,11 +4,12 @@
 //
 //  Created by 许璇 on 2024/5/4.
 //
+// ReminderSelectionView.swift
 
 import SwiftUI
 
 struct ReminderSelectionView: View {
-    @Binding var remindersArray: [[String: String]]
+    @Binding var remindersArray: [Reminder]
     @Binding var selectedItems: [Bool]
     @Binding var isPresented: Bool
     
@@ -20,8 +21,8 @@ struct ReminderSelectionView: View {
             
             ScrollView {
                 VStack(spacing: 10) {
-                    ForEach(remindersArray.indices, id: \.self) { index in
-                        ReminderSelectionRow(reminder: remindersArray[index], isSelected: $selectedItems[index])
+                    ForEach($remindersArray.indices, id: \.self) { index in
+                        ReminderSelectionRow(reminder: $remindersArray[index], isSelected: $selectedItems[index])
                     }
                 }
                 .padding()
@@ -29,35 +30,61 @@ struct ReminderSelectionView: View {
             
             Button("Add Selected Reminders") {
                 let reminderManager = ReminderManager()
-                reminderManager.createReminders(from: remindersArray, selectedItems: selectedItems)
+                let selectedReminders = remindersArray.enumerated().compactMap { index, reminder in
+                    selectedItems[index] ? reminder : nil
+                }
+                reminderManager.createReminders(from: selectedReminders.map { Reminder(title: $0.title, time: $0.time) })
                 isPresented = false // Dismiss the ReminderSelectionView
             }
             .padding()
         }
-        .onAppear {
-            print("ReminderSelectionView appeared.")
-            print("remindersArray: \(remindersArray)")
-            print("selectedItems: \(selectedItems)")
-        }
+        
     }
 }
 
 struct ReminderSelectionRow: View {
-    let reminder: [String: String]
+    @Binding var reminder: Reminder
     @Binding var isSelected: Bool
-    
+    @State private var selectedDate: Date = Date() // State to hold the selected date
+
     var body: some View {
-        HStack {
-            Text(reminder["title"] ?? "")
-            Spacer()
-            Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                .foregroundColor(isSelected ? .blue : .gray)
-                .onTapGesture {
-                    isSelected.toggle()
-                }
+        VStack {
+            HStack {
+                TextField("Title", text: $reminder.title)
+                Spacer()
+                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    .foregroundColor(isSelected ? .blue : .gray)
+                    .onTapGesture {
+                        isSelected.toggle()
+                    }
+            }
+            .padding()
+            
+            DatePicker(
+                "Select Time",
+                selection: $selectedDate,
+                displayedComponents: [.date, .hourAndMinute]
+            )
+            .datePickerStyle(WheelDatePickerStyle())
+            .onChange(of: selectedDate) { newValue in
+                // Update reminder.time when selectedDate changes
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                reminder.time = dateFormatter.string(from: newValue)
+            }
+            .onAppear {
+                // Initialize the selectedDate from reminder.time
+                selectedDate = convertStringToDate(reminder.time) ?? Date()
+            }
         }
         .padding()
         .background(Color.secondary.opacity(0.1))
         .cornerRadius(10)
+    }
+    
+    func convertStringToDate(_ dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.date(from: dateString)
     }
 }

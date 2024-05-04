@@ -5,14 +5,20 @@
 //  Created by Xuan Xu on 2024/5/3.
 //
 
+// Updated ContentView.swift
 import SwiftUI
+struct Reminder: Identifiable {
+    let id = UUID()
+    var title: String
+    var time: String
+}
 
 struct ContentView: View {
     var selection = "👾"
     @State private var showImagePicker: Bool = false
-    @State private var selectedImage: UIImage?
+    @State private var selectedImages: [UIImage] = [] // Update to hold multiple selected images
     @State private var ocrText: String = ""
-    @State private var remindersArray: [[String: String]] = [] // Array to store fetched reminders
+    @State private var reminders: [Reminder] = [] // Array to store fetched reminders
     
     // Instances of ReminderService and ReminderManager
     private let reminderService = ReminderService()
@@ -30,61 +36,71 @@ struct ContentView: View {
             Text(selection)
                 .font(.system(size: 150))
             
-            // If an image is selected, display it
-            if let selectedImage = selectedImage {
-                Image(uiImage: selectedImage)
-                    .resizable()
-                    .scaledToFit()
-
-                // Display OCR Result
-                if !ocrText.isEmpty {
-                    Text(ocrText)
-                        .padding()
+            // Display selected images
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(selectedImages, id: \.self) { image in
+                        Image(uiImage: image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 150, height: 150)
+                            .padding()
+                    }
                 }
             }
             
-            // Button to upload image
-            Button("Upload Image") {
+            // Button to upload images
+            Button("Upload Images") {
                 showImagePicker = true
             }
             
             // Button to perform OCR and handle reminders
-            if selectedImage != nil {
+            if !selectedImages.isEmpty {
                 Button("Perform OCR") {
                     let ocrController = OCRController()
-                    ocrController.recognizeText(from: selectedImage!) { result in
-                        switch result {
-                        case .success(let text):
-                            self.ocrText = text
-                            print("Recognized Text: \(text)")
-                            
-                            // Fetch dummy data from ReminderService
-                            reminderService.fetchReminders { result in
-                                switch result {
-                                case .success(let fetchedReminders):
-                                    // Update remindersArray and selectedItems
-                                    self.remindersArray = fetchedReminders
-                                    self.selectedItems = Array(repeating: true, count: fetchedReminders.count)
-                                    
-                                    // Show the reminder selection view
-                                    self.showReminderSelectionView = true
-                                case .failure(let error):
-                                    print("Error fetching reminders: \(error)")
+                    // Loop through each selected image
+                    for image in selectedImages {
+                        ocrController.recognizeText(from: image) { result in
+                            switch result {
+                            case .success(let text):
+                                self.ocrText += text + "\n" // Concatenate the recognized text
+                                print("Recognized Text: \(text)")
+                                
+                                // Fetch dummy data from ReminderService
+                                reminderService.fetchReminders(ocrData: self.ocrText) { result in
+                                    switch result {
+                                    case .success(let fetchedReminders):
+                                        // Update remindersArray and selectedItems
+                                        let newReminders = fetchedReminders.compactMap { dict -> Reminder? in
+                                                                guard let title = dict["title"], let time = dict["time"] else { return nil }
+                                                                return Reminder(title: title, time: time)
+                                                            }
+                                                            self.reminders += newReminders
+                                                            self.selectedItems += Array(repeating: true, count: newReminders.count)
+                                                            
+                                        
+                                        // Show the reminder selection view after processing all images
+                                        if self.selectedImages.last == image {
+                                            self.showReminderSelectionView = true
+                                        }
+                                    case .failure(let error):
+                                        print("Error fetching reminders: \(error)")
+                                    }
                                 }
+                                
+                            case .failure(let error):
+                                print("Error: \(error)")
                             }
-                            
-                        case .failure(let error):
-                            print("Error: \(error)")
                         }
                     }
                 }
             }
         }
         .sheet(isPresented: $showImagePicker) {
-            ImagePicker(selectedImage: $selectedImage)
+            ImagePicker(selectedImages: $selectedImages)
         }
         .sheet(isPresented: $showReminderSelectionView) {
-            ReminderSelectionView(remindersArray: $remindersArray, selectedItems: $selectedItems, isPresented: $showReminderSelectionView)
+            ReminderSelectionView(remindersArray: $reminders, selectedItems: $selectedItems, isPresented: $showReminderSelectionView)
         }
     }
 }

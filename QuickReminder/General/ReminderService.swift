@@ -5,6 +5,8 @@
 //  Created by 许璇 on 2024/5/3.
 //
 
+// TODO: Only fetch the JSON data
+
 import Foundation
 
 struct ReminderService {

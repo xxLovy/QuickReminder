@@ -11,7 +11,9 @@ import SwiftUI
 struct QuickReminderApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                            HomePage()
+                        }
         }
     }
 }

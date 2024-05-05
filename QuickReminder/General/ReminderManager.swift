@@ -24,14 +24,12 @@ class ReminderManager {
                 reminders.forEach { reminder in
                     let ekReminder = EKReminder(eventStore: self.eventStore)
                     ekReminder.title = reminder.title
+                    ekReminder.notes = reminder.notes
+                    ekReminder.startDateComponents = reminder.startDateComponents
+                    ekReminder.dueDateComponents = reminder.dueDateComponents
+                    ekReminder.priority = reminder.priority
                     ekReminder.calendar = calendar
-                    
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                    if let date = dateFormatter.date(from: reminder.time) {
-                        ekReminder.dueDateComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute, .second], from: date)
-                    }
-                    
+
                     do {
                         try self.eventStore.save(ekReminder, commit: true)
                     } catch let saveError {

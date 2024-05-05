@@ -33,10 +33,15 @@ struct ReminderSelectionView: View {
                 let selectedReminders = remindersArray.enumerated().compactMap { index, reminder in
                     selectedItems[index] ? reminder : nil
                 }
-                reminderManager.createReminders(from: selectedReminders.map { Reminder(title: $0.title, time: $0.time) })
+                reminderManager.createReminders(from: selectedReminders )
                 isPresented = false // Dismiss the ReminderSelectionView
             }
             .padding()
+        }
+        .onDisappear {
+            // 重置 remindersArray 和 selectedItems
+            remindersArray = []
+            selectedItems = []
         }
         
     }
@@ -77,13 +82,13 @@ struct ReminderSelectionRow: View {
                             // Update reminder.time when selectedDate changes
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                            reminder.time = dateFormatter.string(from: newValue)
+                            reminder.dueDateComponentsAsString = dateFormatter.string(from: newValue)
                         }
                         .onAppear {
                             // Initialize the selectedDate and initialDate from reminder.time
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                            if let date = dateFormatter.date(from: reminder.time) {
+                            if let date = dateFormatter.date(from: reminder.dueDateComponentsAsString ?? "") {
                                 selectedDate = date
                                 initialDate = date // Store the initial date
                             }

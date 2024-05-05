@@ -5,6 +5,7 @@
 //  Created by 许璇 on 2024/5/4.
 //
 // ReminderSelectionView.swift
+// TODO: add a new Card and edit detailed
 
 import SwiftUI
 
@@ -94,6 +95,15 @@ struct ReminderSelectionRow: View {
                             }
                         }
                         
+//                        Button(action: {
+//                            // Reset the selectedDate to the initial date
+//                            selectedDate = initialDate
+//                        }, label: {
+//                            Text("Edit Detailed Infomation")
+//                                .foregroundColor(.red)
+//                        })
+            
+            
                         Button(action: {
                             // Reset the selectedDate to the initial date
                             selectedDate = initialDate
@@ -101,10 +111,14 @@ struct ReminderSelectionRow: View {
                             Text("Restore to default time")
                                 .foregroundColor(.red)
                         })
+            
                     }
                     .padding()
                     .background(Color.secondary.opacity(0.1))
                     .cornerRadius(10)
+        
+        
+        
     }
     
     func convertStringToDate(_ dateString: String) -> Date? {

@@ -11,7 +11,7 @@ struct HomePage: View {
     var body: some View {
         VStack {
             // The top two-thirds of the screen with an explanatory text box
-            Text("Welcome to the QuickReminder App!\nHere you can create reminders quickly using text, images, or voice.")
+            Text("Welcome to the QuickReminder App!\nHere you can create reminders quickly using text, images, or even your voice.")
                 .padding()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.blue.opacity(0.1))
@@ -39,12 +39,11 @@ struct HomePage: View {
                 }
                 
                 // Voice button
-                Button(action: {
-                    // Action for Voice button
-                }) {
+                NavigationLink(destination: UploadVoiceView()) {
                     Text("Voice")
                         .frame(maxWidth: .infinity)
                 }
+                
             }
             .frame(maxHeight: .infinity / 3)
         }

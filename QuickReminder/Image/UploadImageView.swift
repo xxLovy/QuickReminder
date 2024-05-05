@@ -1,11 +1,11 @@
 //
-//  ContentView.swift
+//  UploadImageView.swift
 //  QuickReminder
 //
 //  Created by Xuan Xu on 2024/5/3.
 //
 
-// Updated ContentView.swift
+// Updated UploadImageView.swift
 
 import SwiftUI
 
@@ -84,19 +84,25 @@ struct UploadImageView: View {
                 
     private func performOCR() {
         let ocrController = OCRController()
-        
+
+        // 存储所有图像的 OCR 结果
+        var allOCRText = ""
+
         // 递归函数，处理下一个图像
         func processNextImage(index: Int) {
             guard index < selectedImages.count else { // 检查是否已处理完所有图像
-                reminderHelper.handleTextResult(text: ocrText) // 处理文本结果
+                // 所有图像处理完毕后调用 handleTextResult
+                print(allOCRText)
+                reminderHelper.handleTextResult(text: allOCRText)
+                self.showReminderSelectionView = true
                 return
             }
-            
+
             // 处理当前图像
             ocrController.recognizeText(from: selectedImages[index]) { result in
                 switch result {
                 case .success(let text):
-                    ocrText += text + "\n" // 将文本添加到 ocrText 中
+                    allOCRText += text + "\n" // 将文本添加到 allOCRText 中
                     processNextImage(index: index + 1) // 处理下一个图像
                 case .failure(let error):
                     print("Error: \(error)")
@@ -104,10 +110,11 @@ struct UploadImageView: View {
                 }
             }
         }
-        
+
         // 开始处理第一个图像
         processNextImage(index: 0)
     }
 
-                
-            }
+
+
+}

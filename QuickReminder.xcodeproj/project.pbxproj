@@ -24,6 +24,8 @@
 		D9559B712BE4E2DB002BF47C /* OCRController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9559B702BE4E2DB002BF47C /* OCRController.swift */; };
 		D9559B8D2BE50BE1002BF47C /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9559B8C2BE50BE1002BF47C /* ReminderManager.swift */; };
 		D9559B8F2BE50E0C002BF47C /* ReminderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9559B8E2BE50E0C002BF47C /* ReminderService.swift */; };
+		D96878E12BE90405008DB3E4 /* ListControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96878E02BE90405008DB3E4 /* ListControl.swift */; };
+		D96878E42BE90C1F008DB3E4 /* TestAddListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96878E32BE90C1F008DB3E4 /* TestAddListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		D9559B8C2BE50BE1002BF47C /* ReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderManager.swift; sourceTree = "<group>"; };
 		D9559B8E2BE50E0C002BF47C /* ReminderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderService.swift; sourceTree = "<group>"; };
 		D9559B902BE5203D002BF47C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D96878E02BE90405008DB3E4 /* ListControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListControl.swift; sourceTree = "<group>"; };
+		D96878E32BE90C1F008DB3E4 /* TestAddListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestAddListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,13 +67,10 @@
 		D9121B292BE663C3007FC3A4 /* General */ = {
 			isa = PBXGroup;
 			children = (
-				D9121B272BE5DFFA007FC3A4 /* Prompt.swift */,
-				D9559B8E2BE50E0C002BF47C /* ReminderService.swift */,
-				D9559B8C2BE50BE1002BF47C /* ReminderManager.swift */,
-				D9121B252BE5CE6F007FC3A4 /* ReminderSelectionView.swift */,
+				D96878DF2BE903A6008DB3E4 /* ReminderControl */,
+				D96878DE2BE90397008DB3E4 /* ListControl */,
 				D9121B2D2BE66469007FC3A4 /* HomePage.swift */,
 				D9121B312BE66AAE007FC3A4 /* Helper.swift */,
-				D9121B3A2BE7A570007FC3A4 /* EditReminderView.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -140,6 +141,27 @@
 				D9559B652BE4C141002BF47C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D96878DE2BE90397008DB3E4 /* ListControl */ = {
+			isa = PBXGroup;
+			children = (
+				D96878E02BE90405008DB3E4 /* ListControl.swift */,
+				D96878E32BE90C1F008DB3E4 /* TestAddListView.swift */,
+			);
+			path = ListControl;
+			sourceTree = "<group>";
+		};
+		D96878DF2BE903A6008DB3E4 /* ReminderControl */ = {
+			isa = PBXGroup;
+			children = (
+				D9121B272BE5DFFA007FC3A4 /* Prompt.swift */,
+				D9559B8E2BE50E0C002BF47C /* ReminderService.swift */,
+				D9559B8C2BE50BE1002BF47C /* ReminderManager.swift */,
+				D9121B252BE5CE6F007FC3A4 /* ReminderSelectionView.swift */,
+				D9121B3A2BE7A570007FC3A4 /* EditReminderView.swift */,
+			);
+			path = ReminderControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,9 +240,11 @@
 				D9121B2E2BE66469007FC3A4 /* HomePage.swift in Sources */,
 				D9121B352BE728AF007FC3A4 /* Types.swift in Sources */,
 				D9121B282BE5DFFA007FC3A4 /* Prompt.swift in Sources */,
+				D96878E42BE90C1F008DB3E4 /* TestAddListView.swift in Sources */,
 				D9121B392BE739DB007FC3A4 /* VoiceManager.swift in Sources */,
 				D9121B3B2BE7A570007FC3A4 /* EditReminderView.swift in Sources */,
 				D9559B712BE4E2DB002BF47C /* OCRController.swift in Sources */,
+				D96878E12BE90405008DB3E4 /* ListControl.swift in Sources */,
 				D9559B8D2BE50BE1002BF47C /* ReminderManager.swift in Sources */,
 				D9559B6D2BE4C9B4002BF47C /* ImagePicker.swift in Sources */,
 				D9121B302BE66714007FC3A4 /* UploadTextView.swift in Sources */,

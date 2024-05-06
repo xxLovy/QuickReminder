@@ -70,8 +70,8 @@ struct UploadImageView: View {
                                     .background(selectedImages.isEmpty ? Color.gray : Color.blue)
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
-                                    .disabled(selectedImages.isEmpty)
                             }
+                            .disabled(selectedImages.isEmpty)
                         
                     }
                     .sheet(isPresented: $showImagePicker) {

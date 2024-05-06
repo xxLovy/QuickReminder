@@ -44,6 +44,13 @@ struct HomePage: View {
                         .frame(maxWidth: .infinity)
                 }
                 
+//                // Test add list functionality
+//                NavigationLink(destination: AddReminderListView()) {
+//                    Text("Add List")
+//                        .frame(maxWidth: .infinity)
+//                }
+
+                
             }
             .frame(maxHeight: .infinity / 3)
         }

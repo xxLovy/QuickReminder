@@ -5,6 +5,8 @@
 //  Created by 许璇 on 2024/5/4.
 //
 // TODO: imporve Prompt or use several different prompts to deal with different situations
+// TODO: Create a Specific List to include the reminders
+// TODO: Other format reminders to add
 
 
 import Foundation

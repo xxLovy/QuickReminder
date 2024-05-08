@@ -6,6 +6,7 @@
 //
 // ReminderSelectionView.swift
 // TODO: add a new Card and edit detailed
+// TODO: Edit list
 
 import SwiftUI
 
